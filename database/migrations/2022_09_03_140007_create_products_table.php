@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('slug');
            
             $table->text('description');
-            $table->text('filling_number'); 
+            $table->string('business_type'); 
+
+            $table->string('phone_number'); 
+            $table->string('mail')->unique(); 
             
             $table->unsignedBigInteger('subcategory_id');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
@@ -45,8 +48,8 @@ return new class extends Migration
             $table->unsignedBigInteger('county_id')->nullable();
             $table->foreign('county_id')->references('id')->on('counties')->onDelete('cascade');
             
-            $table->unsignedBigInteger('business_id')->nullable();
-            $table->foreign('business_id')->references('id')->on('businesses')->onDelete('cascade');
+            $table->unsignedBigInteger('filling_number_id')->nullable();
+            $table->foreign('filling_number_id')->references('id')->on('filling_numbers')->onDelete('cascade');
 
             $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR);
 

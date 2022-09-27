@@ -47,7 +47,7 @@ class Product extends Model
     }
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); // user_id
     }
 
     /* relacion uno a uno */
@@ -55,6 +55,13 @@ class Product extends Model
     public function business()
     {
         return $this->hasOne(Business::class);
+    }
+
+    /* relacion uno a uno */
+
+    public function filling_number() // filling_number_id
+    {
+        return $this->belongsTo(FillingNumber::class);
     }
 
     //URL AMIGABLES

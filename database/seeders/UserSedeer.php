@@ -23,7 +23,7 @@ class UserSedeer extends Seeder
             'email' => 'etoomonline@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('12345678'),
-            'phone_number' => '+17865312938',
+            /* 'phone_number' => '+17865312938', */
             'remember_token' => Str::random(10),
         ])->assignRole('admin');
 
@@ -33,7 +33,7 @@ class UserSedeer extends Seeder
             'email' => 'felipe@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('password'),
-            'phone_number' => '633401094',
+            /* 'phone_number' => '633401094', */
             'remember_token' => Str::random(10),
         ])->assignRole('client');
     }

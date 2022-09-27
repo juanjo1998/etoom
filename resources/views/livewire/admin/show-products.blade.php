@@ -14,10 +14,7 @@
 
 
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="container py-12">
-       
-            
-       
+    <div class="container py-12">       
         <x-table-responsive>
 
             <div class="px-6 py-4">

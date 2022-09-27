@@ -16,7 +16,7 @@ class CreateCategory extends Component
 
     use WithFileUploads;
 
-    public $brands, $categories, $category, $rand;
+    public /* $brands, */ $categories, $category, $rand;
 
     protected $listeners = ['delete'];
 
@@ -25,7 +25,7 @@ class CreateCategory extends Component
         'name' => null,
         'slug' => null,
         'image' => null,
-        'brands' => [],
+       /*  'brands' => [], */
     ];
 
     public $editForm = [
@@ -33,7 +33,7 @@ class CreateCategory extends Component
         'name' => null,
         'slug' => null,
         'image' => null,
-        'brands' => [],
+       /*  'brands' => [], */
     ];
 
     public $editImage;
@@ -42,22 +42,22 @@ class CreateCategory extends Component
         'createForm.name' => 'required',
         'createForm.slug' => 'required|unique:categories,slug',
         'createForm.image' => 'required|image|max:1024',
-        'createForm.brands' => 'required',
+       /*  'createForm.brands' => 'required', */
     ];
 
     protected $validationAttributes = [
         'createForm.name' => 'nombre',
         'createForm.slug' => 'slug',
         'createForm.image' => 'imagen',
-        'createForm.brands' => 'marcas',
+        /* 'createForm.brands' => 'marcas', */
         'editForm.name' => 'nombre',
         'editForm.slug' => 'slug',
         'editImage' => 'imagen',
-        'editForm.brands' => 'marcas'
+        /* 'editForm.brands' => 'marcas' */
     ];
 
     public function mount(){
-        $this->getBrands();
+       /*  $this->getBrands(); */
         $this->getCategories();
         $this->rand = rand();
     }
@@ -70,9 +70,9 @@ class CreateCategory extends Component
         $this->editForm['slug'] = Str::slug($value);
     }
 
-    public function getBrands(){
+    /* public function getBrands(){
         $this->brands = Brand::all();
-    }
+    } */
 
     public function getCategories(){
         $this->categories = Category::all();
@@ -90,7 +90,7 @@ class CreateCategory extends Component
             'image' => $image
         ]);
 
-        $category->brands()->attach($this->createForm['brands']);
+       /*  $category->brands()->attach($this->createForm['brands']); */
 
         $this->rand = rand();
         $this->reset('createForm');
@@ -111,7 +111,7 @@ class CreateCategory extends Component
         $this->editForm['slug'] = $category->slug;
        
         $this->editForm['image'] = ($category->image);
-        $this->editForm['brands'] = $category->brands->pluck('id');
+       /*  $this->editForm['brands'] = $category->brands->pluck('id'); */
     }
 
     public function update(){
@@ -119,7 +119,7 @@ class CreateCategory extends Component
         $rules = [
             'editForm.name' => 'required',
             'editForm.slug' => 'required|unique:categories,slug,' . $this->category->id,
-            'editForm.brands' => 'required',
+            /* 'editForm.brands' => 'required', */
         ];
 
         if ($this->editImage) {
@@ -135,7 +135,7 @@ class CreateCategory extends Component
 
         $this->category->update($this->editForm);
 
-        $this->category->brands()->sync($this->editForm['brands']);
+       /*  $this->category->brands()->sync($this->editForm['brands']); */
 
         $this->reset(['editForm', 'editImage']);
 

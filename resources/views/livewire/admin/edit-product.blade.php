@@ -120,21 +120,7 @@
         </div>
         <x-jet-input-error for="product.description" />
     </div>
-
-    <div class="bg-white shadow-xl rounded-lg p-6 mb-4">
-    <div class="grid grid-cols-2 gap-6 mb-4">
-        
-        {{-- Precio --}}
-        <div>
-            <x-jet-label value=" USD Precio" />
-            <x-jet-input disabled wire:model="product.price" 
-            type="number" class="w-full" 
-            step="1.00" />
-            <x-jet-input-error for="product.price" />
-        </div>
-    </div>
-    </div>
-
+   
     <div class="flex justify-end items-center mt-4">
 
         <x-jet-action-message class="mr-3" on="saved">
@@ -167,7 +153,6 @@
                     Livewire.emit('refreshProduct');
                 }
             };
-            
             Livewire.on('deleteProduct', () => {
                 Swal.fire({
                     title: 'Are you sure?',

@@ -11,6 +11,7 @@ use Livewire\Component;
 use App\Models\Business;
 use App\Models\Category;
 use App\Models\Department;
+use App\Models\FillingNumber;
 use App\Models\Subcategory;
 
 use Illuminate\Support\Str;
@@ -23,8 +24,8 @@ class CreateProduct extends Component
     // ! $cities = [] , $counties = [] deben iniciar como un arreglo vacío, hasta que no seleccione un departamento no se va a llenar esta informacion, de lo contrario le dara error
 
     public $categories, $subcategories = [], $brands = [], $departments, $cities = [] , $counties = [];
-    public $category_id = "", $subcategory_id = "", $brand_id = "", $department_id = "", $city_id = "", $county_id = "",$business_id = "";
-    public $name, $slug, $description, $price,$filling_number,$businesses;
+    public $category_id = "", $subcategory_id = "", $brand_id = "", $department_id = "", $city_id = "", $county_id = "",$filling_number_id = "";
+    public $name,$phone_number,$mail, $slug, $description, $price,$business_type;
 
     public $object;
 
@@ -33,10 +34,12 @@ class CreateProduct extends Component
         'category_id' => 'required',
         'subcategory_id' => 'required',
         'name' => 'required',
+        'phone_number' => 'required',
+        'mail' => 'required',
         'slug' => 'required|unique:products',
         'description' => 'required',
-        'filling_number' => 'required',
-        'business_id' => 'required',
+        'business_type' => 'required',
+        'filling_number_id' => 'required',
         'department_id' => 'required',
         'city_id' => 'required',
         'county_id' => 'required',
@@ -77,7 +80,7 @@ class CreateProduct extends Component
         // ! estas son tablas que no dependen de ninguna,por tanto puede traerse la informacion usando el metodo all()
         $this->categories = Category::all();
         $this->departments = Department::all();
-        $this->businesses = Business::all();
+        $this->filling_numbers = FillingNumber::all();
 
         // ! estas dos lineas no deben ir en este metodo, pues no debemos llenar el select con las ciudades y condados cuando aún no hemos seleccionado un departamento que es lo primero deberiamos hacer
        /*  $this->cities = City::all();
@@ -97,14 +100,16 @@ class CreateProduct extends Component
         $product->name = $this->name;
         $product->slug = $this->slug;
         $product->description = $this->description;
+        $product->phone_number = $this->phone_number;
+        $product->mail = $this->mail;
 
         // ! price no está en el formulario y es obligatorio, en las migraciones tuve que dejarlo en nullable()
         $product->subcategory_id = $this->subcategory_id;
         $product->department_id = $this->department_id;
         $product->city_id = $this->city_id;
         $product->county_id = $this->county_id;
-        $product->business_id = $this->business_id;
-        $product->filling_number = $this->filling_number;
+        $product->filling_number_id = $this->filling_number_id;
+        $product->business_type = $this->business_type;
 
         // ! linea agregada
 

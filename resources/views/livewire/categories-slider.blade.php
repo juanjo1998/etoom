@@ -4,7 +4,6 @@
         <ul class="glider">
           
             @foreach ($categories as $category)
-
                 <li class="bg-white rounded-lg shadow {{ $loop->last ? '' : 'sm: mr-4' }}">
                     <article>
                         <figure>

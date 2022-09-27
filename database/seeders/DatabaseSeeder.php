@@ -39,12 +39,12 @@ class DatabaseSeeder extends Seeder
 
         // ! primero se deben crear los departamentos, ciudades, y condados para que se le puedan asignar a la tabla products
         $this->call(DepartmentSeeder::class);
-        $this->call(BusinessSeeder::class);
-        $this->call(ProductSeeder::class);
+        $this->call(FillingNumberSeeder::class);
+        //$this->call(ProductSeeder::class);
 
 
-        User::factory(5)->create()->each(function ($user) {
+       /*  User::factory(5)->create()->each(function ($user) {
             $user->assignRole('client');    
-        });
+        });    */     
     }
 }

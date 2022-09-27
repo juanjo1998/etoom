@@ -29,8 +29,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'last_name',
-        'phone_number',
+        'last_name',        
         'email',
         'password',
     ];
@@ -67,6 +66,6 @@ class User extends Authenticatable
 
     //Relacion uno a muchos
     public function products(){
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class); // user_id
     }
 }

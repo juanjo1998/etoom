@@ -1,11 +1,89 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
     
-    {{$object}}
-
     <h1 class="text-3xl text-center font-semibold mb-8">Fill in the information to create your advertsing space</h1>
 
     <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
 
+         {{-- name --}}
+        <div class="mb-4">
+            <x-jet-label value="Name" />
+            <x-jet-input type="text" 
+                        class="w-full"
+                        wire:model="name"
+                        placeholder="Enter business name" />
+            <x-jet-input-error for="name" />
+        </div>
+
+        {{-- slug --}}
+        <div class="mb-4">
+            <x-jet-label value="Slug" />
+            <x-jet-input type="text"
+                disabled
+                wire:model="slug"
+                class="w-full bg-gray-200" 
+                placeholder="Slug business" />
+
+            <x-jet-input-error for="slug" />
+        </div>        
+    </div>
+
+
+    <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
+
+        {{-- phone_number --}}
+       <div class="mb-4">
+           <x-jet-label value="Phone number" />
+           <x-jet-input type="text" 
+                       class="w-full"
+                       wire:model="phone_number"
+                       placeholder="Enter phone number" />
+           <x-jet-input-error for="phone_number" />
+       </div>
+
+        {{-- mail --}}
+        <div class="mb-4">
+            <x-jet-label value="Mail" />
+            <x-jet-input type="email" 
+                        class="w-full"
+                        wire:model="mail"
+                        placeholder="Enter mail" />
+            <x-jet-input-error for="mail" />
+        </div>   
+    </div>
+
+    {{-- business type && filling_number --}}
+
+    <div class="flex justify-center items-center bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+        
+        {{-- filling number --}}       
+        <div class="flex-1">
+           <x-jet-label value="Filling Number" />
+           <select class="w-full form-control" wire:model="filling_number_id">
+               <option value="" selected disabled>Select a filling number</option>
+
+               @foreach ($filling_numbers as $filling_number)
+                   <option value="{{$filling_number->id}}">{{$filling_number->number}}</option>
+               @endforeach
+           </select>
+
+           <x-jet-input-error for="filling_number_id" />
+       </div>
+
+       {{-- business id --}}
+       <div class="flex-1">
+           <x-jet-label value="Business Type" />
+           <x-jet-input type="text" 
+                       class="w-full"
+                       wire:model="business_type"
+                       placeholder="Enter business type" />
+           <x-jet-input-error for="business_type" />
+       </div>
+
+    </div>
+
+    {{-- categories - subcategories --}}
+
+    <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
         {{-- Categoría --}}
         <div>
             <x-jet-label value="Categories" />
@@ -34,29 +112,6 @@
             <x-jet-input-error for="subcategory_id" />
         </div>
     </div>
-    <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
-    {{-- name --}}
-    <div class="mb-4">
-        <x-jet-label value="Name" />
-        <x-jet-input type="text" 
-                    class="w-full"
-                    wire:model="name"
-                    placeholder="Enter business name" />
-        <x-jet-input-error for="name" />
-    </div>
-
-    {{-- slug --}}
-    <div class="mb-4">
-        <x-jet-label value="Slug" />
-        <x-jet-input type="text"
-            disabled
-            wire:model="slug"
-            class="w-full bg-gray-200" 
-            placeholder="Slug business" />
-
-    <x-jet-input-error for="slug" />
-    </div>
-    </div>
 
     {{-- description --}}
     <div class="mb-4">
@@ -78,11 +133,13 @@
             </textarea>
         </div>
         <x-jet-input-error for="description" />
-    </div>
+    </div>    
 
+   
     {{-- states, cities, counties --}}
+
+    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
     
-    <div class="flex justify-center items-center bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
         {{-- states --}}
         <div class="flex-1">
             <x-jet-label value="States" />
@@ -97,8 +154,8 @@
             <x-jet-input-error for="department_id" />
         </div>
 
-         {{-- cities --}}
-         <div class="flex-1">
+        {{-- cities --}}
+        <div class="flex-1">
             <x-jet-label value="Cities" />
             <select class="w-full form-control" wire:model="city_id">
                 <option value="" selected disabled>Select a city</option>
@@ -111,8 +168,8 @@
             <x-jet-input-error for="city_id" />
         </div>
 
-         {{-- counties --}}
-         <div class="flex-1">
+        {{-- counties --}}
+        <div class="flex-1">
             <x-jet-label value="Counties" />
             <select class="w-full form-control" wire:model="county_id">
                 <option value="" selected disabled>Select a county</option>
@@ -123,34 +180,6 @@
             </select>
 
             <x-jet-input-error for="county_id" />
-        </div>
-    </div>
-
-    {{-- business type && filling_number --}}
-    
-    <div class="grid grid-cols-2 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
-        {{-- business id --}}
-        <div>
-            <x-jet-label value="Filling Number" />
-            <select class="w-full form-control" wire:model="business_id">
-                <option value="" selected disabled>Select a filling number</option>
-
-                @foreach ($businesses as $business)
-                    <option value="{{$business->id}}">{{$business->name}}</option>
-                @endforeach
-            </select>
-
-            <x-jet-input-error for="business_id" />
-        </div>
-
-        {{-- filling number --}}
-        <div>
-            <x-jet-label value="Business Type" />
-            <x-jet-input type="text" 
-                        class="w-full"
-                        wire:model="filling_number"
-                        placeholder="Enter business type" />
-            <x-jet-input-error for="business_id" />
         </div>
     </div>
 

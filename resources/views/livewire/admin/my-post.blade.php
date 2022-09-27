@@ -17,6 +17,11 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
+
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Imagen
+                            </th>
                            
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -28,12 +33,28 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Estado
+                                Subcategory
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Precio
+                                Filling number
                             </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Business type
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Phone number
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Business mail
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Estado
+                            </th>                          
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Editar</span>
                             </th>
@@ -44,6 +65,7 @@
                         @foreach ($products as $product)
 
                             <tr>
+                                {{-- imagen --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-10 w-10">
@@ -57,14 +79,20 @@
                                                 <img class="h-10 w-10 rounded-full object-cover"
                                                     src="https://images.pexels.com/photos/5961541/pexels-photo-5961541.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="">
                                             @endif
-                                        </div>
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">
-                                                {{ $product->name }}
-                                            </div>
-                                        </div>
+                                        </div>                                        
                                     </div>
                                 </td>
+
+                                {{-- product name --}}
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->name }}
+                                    </div>
+
+                                </td>
+                                
+                                {{-- category name --}}
                                 <td class="px-6 py-4 whitespace-nowrap">
 
                                     <div class="text-sm text-gray-900">
@@ -72,6 +100,59 @@
                                     </div>
 
                                 </td>
+
+                                {{-- subcategory name --}}
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->subcategory->name }}
+                                    </div>
+
+                                </td>
+
+                                {{-- filling number --}}
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->filling_number->number }}
+                                    </div>
+
+                                </td>
+
+                                {{-- business type --}}
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->business_type }}
+                                    </div>
+
+                                </td>
+
+                                {{-- phone_number --}}
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->phone_number }}
+                                    </div>
+
+                                </td>
+
+                                {{-- mail --}}
+
+                                <td class="px-6 py-4 whitespace-nowrap">
+
+                                    <div class="text-sm text-gray-900">
+                                        {{ $product->mail }}
+                                    </div>
+
+                                </td> 
+                                
+                                {{-- status --}}
+
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @switch($product->status)
                                         @case(1)
@@ -90,10 +171,10 @@
 
                                     @endswitch
 
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    {{$product->user_id}} USD
-                                </td>
+                                </td>  
+                                
+                                {{-- edit --}}
+
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                 </td>

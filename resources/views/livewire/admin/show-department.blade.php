@@ -29,7 +29,7 @@
                     <x-jet-input-error for="createForm.name" />
                 </div>
 
-                <div class="col-span-6 sm:col-span-4">
+                {{-- <div class="col-span-6 sm:col-span-4">
                     <x-jet-label>
                         Costo
                     </x-jet-label>
@@ -37,7 +37,7 @@
                     <x-jet-input wire:model.defer="createForm.cost" type="number" class="w-full mt-1" />
     
                     <x-jet-input-error for="createForm.cost" />
-                </div>
+                </div> --}}
             </x-slot>
     
             <x-slot name="actions">

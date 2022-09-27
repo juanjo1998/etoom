@@ -30,7 +30,7 @@
             </div>
 
         
-            <div class="col-span-6 sm:col-span-4">
+           {{--  <div class="col-span-6 sm:col-span-4">
                 <x-jet-label>
                     Marcas
                 </x-jet-label>
@@ -49,7 +49,7 @@
                     @endforeach
                 </div>
                 <x-jet-input-error for="createForm.brands" />
-            </div>
+            </div> --}}
 
             <div class="col-span-6 sm:col-span-4">
                 <x-jet-label>
@@ -156,7 +156,7 @@
                     <x-jet-input-error for="editForm.slug" />
                 </div>
 
-                <div>
+                {{-- <div>
                     <x-jet-label>
                         Marcas
                     </x-jet-label>
@@ -175,7 +175,7 @@
                         @endforeach
                     </div>
                     <x-jet-input-error for="editForm.brands" />
-                </div>
+                </div> --}}
 
                 <div>
                     <x-jet-label>

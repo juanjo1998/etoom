@@ -38,8 +38,10 @@ class ProductFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => $this->faker->text(),
-            'filling_number' => '012345678',
-            'business_id' => $this->faker->randomElement([1,2]),
+            'business_type' => 'info del business type',
+            'phone_number' => '000000',
+            'mail' => 'mail empresarial',
+            'filling_number_id' => $this->faker->randomElement([1,2]),
             'subcategory_id' => $subcategory->id,            
             'user_id' => $this->faker->randomElement([1,2]),
             // ! campos agregados  que generan un id aleatorio de departamento ciudad y condado para cada uno de los productos

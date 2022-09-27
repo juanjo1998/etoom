@@ -28,8 +28,6 @@ class EditProduct extends Component
         'product.name' => 'required',
         'slug' => 'required|unique:products,slug',
         'product.description' => 'required',       
-        'product.price' => 'required',
-       
     ];
 
     protected $listeners = ['refreshProduct', 'delete'];
@@ -77,6 +75,8 @@ class EditProduct extends Component
         $this->product->save();
 
         $this->emit('saved');
+
+        return redirect()->route('admin.posts.index');
     }
 
     public function deleteImage(Image $image){
