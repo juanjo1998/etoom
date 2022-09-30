@@ -16,7 +16,7 @@ class MyPost extends Component
 
     public function render()
     {
-        $products = Product::where('user_id', auth()->user()->id)->get(); 
+        $products = Product::where('user_id', auth()->user()->id)->paginate(2); 
 
         $user = User::find(auth()->user()->id);
 

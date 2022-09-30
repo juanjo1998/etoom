@@ -78,8 +78,7 @@ class CategorySeeder extends Seeder
             'name' => 'Travel & Tourism',
             'slug' => Str::slug('Marketing & Developers'),
            
-        ],
-        
+        ],    
 
         ];
 

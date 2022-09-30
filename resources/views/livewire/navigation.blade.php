@@ -1,4 +1,4 @@
-<header class="bg-sky-600 shadow-lg sticky top-0 z-50" x-data="dropDown()">
+<header class="bg-sky-500 shadow-lg sticky top-0 z-50" x-data="dropDown()">
     {{-- logo-categories-search-user-cart --}}
     <div class="container flex items-center h-24 justify-between md:justify-start">        
         {{-- logo --}}
@@ -88,7 +88,7 @@
   {{-- navigation menu--}}
   <nav id="navigation-menu" class="bg-trueGray-700 bg-opacity-25 absolute w-full hidden" x-show="open" :class="{'block':open,'hidden':!open}">
     {{-- desktop menu --}}
-    <div class="container h-80 hidden md:block">
+    <div class="container {{-- h-80 esta clase causa problema --}} hidden md:block">
         <div class="grid grid-cols-4 h-full relative" x-on:click.away="close()">
             <ul class="bg-white">
                 {{-- categories --}}                                       
@@ -190,8 +190,6 @@
             </a>  
         @endauth
 
-    </div>
-   
-   
+    </div>  
 </nav>
 </header>

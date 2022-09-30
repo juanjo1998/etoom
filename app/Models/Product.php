@@ -25,7 +25,7 @@ class Product extends Model
 
     // ! Relacion uno a muchos inversa
     public function city(){
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(City::class);
     }
 
     // ! Relacion uno a muchos inversa

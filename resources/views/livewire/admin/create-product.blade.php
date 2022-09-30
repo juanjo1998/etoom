@@ -2,9 +2,10 @@
     
     <h1 class="text-3xl text-center font-semibold mb-8">Fill in the information to create your advertsing space</h1>
 
+    {{-- name slug --}}
     <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
 
-         {{-- name --}}
+        {{-- name --}}
         <div class="mb-4">
             <x-jet-label value="Name" />
             <x-jet-input type="text" 
@@ -28,12 +29,15 @@
     </div>
 
 
+    {{-- phone number -- mail --}}
+
+
     <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
 
         {{-- phone_number --}}
        <div class="mb-4">
            <x-jet-label value="Phone number" />
-           <x-jet-input type="text" 
+           <x-jet-input type="number" 
                        class="w-full"
                        wire:model="phone_number"
                        placeholder="Enter phone number" />
@@ -41,14 +45,20 @@
        </div>
 
         {{-- mail --}}
-        <div class="mb-4">
+        {{-- <div class="mb-4">
             <x-jet-label value="Mail" />
             <x-jet-input type="email" 
                         class="w-full"
                         wire:model="mail"
                         placeholder="Enter mail" />
             <x-jet-input-error for="mail" />
-        </div>   
+        </div>  --}}  
+
+        <div class="mb-4">
+            <x-jet-label for="mail" value="{{ __('Mail') }}" />
+            <x-jet-input id="mail" class="w-full" type="email" name="mail" :value="old('mail')" required  wire:model="mail" placeholder="Enter business mail"/>
+            <x-jet-input-error for="mail" />
+        </div>
     </div>
 
     {{-- business type && filling_number --}}
@@ -72,7 +82,7 @@
        {{-- business id --}}
        <div class="flex-1">
            <x-jet-label value="Business Type" />
-           <x-jet-input type="text" 
+           <x-jet-input type="number" 
                        class="w-full"
                        wire:model="business_type"
                        placeholder="Enter business type" />
@@ -135,7 +145,6 @@
         <x-jet-input-error for="description" />
     </div>    
 
-   
     {{-- states, cities, counties --}}
 
     <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
@@ -181,6 +190,42 @@
 
             <x-jet-input-error for="county_id" />
         </div>
+    </div>
+
+    {{-- redes sociales --}}
+
+    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+
+        {{-- facebook --}}
+        <div class="mb-4 flex-1">
+            <x-jet-label value="Facebook" />
+            <x-jet-input type="text" 
+                        class="w-full"
+                        wire:model="facebook"
+                        placeholder="Enter facebook" />
+            <x-jet-input-error for="facebook" />
+        </div>
+
+        {{-- instagram --}}
+        <div class="mb-4 flex-1">
+            <x-jet-label value="Instagram" />
+            <x-jet-input type="text" 
+                        class="w-full"
+                        wire:model="instagram"
+                        placeholder="Enter instagram" />
+            <x-jet-input-error for="instagram" />
+        </div>
+
+        {{-- twitter --}}
+        <div class="mb-4 flex-1">
+            <x-jet-label value="Twitter" />
+            <x-jet-input type="text" 
+                        class="w-full"
+                        wire:model="twitter"
+                        placeholder="Enter twitter" />
+            <x-jet-input-error for="twitter" />
+        </div>
+       
     </div>
 
     <div class="flex mt-4">

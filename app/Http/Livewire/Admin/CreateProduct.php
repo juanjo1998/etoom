@@ -27,22 +27,30 @@ class CreateProduct extends Component
     public $category_id = "", $subcategory_id = "", $brand_id = "", $department_id = "", $city_id = "", $county_id = "",$filling_number_id = "";
     public $name,$phone_number,$mail, $slug, $description, $price,$business_type;
 
-    public $object;
+    /* redes */
+    public $facebook,$instagram,$twitter;
 
+    public $object;
 
     protected $rules = [
         'category_id' => 'required',
         'subcategory_id' => 'required',
-        'name' => 'required',
-        'phone_number' => 'required',
-        'mail' => 'required',
+        'name' => 'required|string|max:50',
+        'phone_number' => 'required|string|min:7|max:10',
+        'mail' => 'required|email',
         'slug' => 'required|unique:products',
         'description' => 'required',
-        'business_type' => 'required',
+        'business_type' => 'required|string|min:10|max:15',
         'filling_number_id' => 'required',
         'department_id' => 'required',
         'city_id' => 'required',
         'county_id' => 'required',
+
+        /* redes */
+        /* 'facebook' => 'required',
+        'twitter' => 'required',
+        'instagram' => 'required', */
+
     ];
 
     public function updatedCategoryId($value){
@@ -71,9 +79,9 @@ class CreateProduct extends Component
         $this->slug = Str::slug($value);
     }
 
-    public function getSubcategoryProperty(){
+    /* public function getSubcategoryProperty(){
         return Subcategory::find($this->subcategory_id);
-    }
+    } */
 
     public function mount(){
 
@@ -114,6 +122,13 @@ class CreateProduct extends Component
         // ! linea agregada
 
         $product->user_id = auth()->user()->id;
+
+        /* redes sociales */
+        $product->facebook = $this->facebook;
+        $product->instagram = $this->instagram;
+        $product->twitter = $this->twitter;
+
+
         $product->save();
 
         //return $product;

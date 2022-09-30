@@ -21,11 +21,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
            
-            $table->text('description');
+            $table->text('description',1000);
             $table->string('business_type'); 
 
             $table->string('phone_number'); 
-            $table->string('mail')->unique(); 
+            $table->string('mail'); 
+
+            /* redes */
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
             
             $table->unsignedBigInteger('subcategory_id');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');

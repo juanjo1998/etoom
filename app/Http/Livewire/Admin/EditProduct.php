@@ -2,48 +2,99 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\City;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Image;
-use Livewire\Component;
-
+use App\Models\County;
 use App\Models\Product;
-use App\Models\Subcategory;
-use Illuminate\Database\Eloquent\Builder;
 
-use Illuminate\Support\Facades\Storage;
+use Livewire\Component;
+use App\Models\Category;
+use App\Models\Department;
+use App\Models\Subcategory;
 
 use Illuminate\Support\Str;
+
+use App\Models\FillingNumber;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 class EditProduct extends Component
 {
 
-    public $product, $categories, $subcategories,$slug;
-
     public $category_id;
 
+    public $product, $categories,$slug;
+    public $filling_numbers;
+    public $mail,$phone_number;
+
+    public $subcategories = [];
+
+    public $departments,$cities = [],$counties = [];
+    public $department_id = "",$city_id = "",$county_id = "";
+
+    public $status;
+    public $status_id;
+
+    /* redes */
+
+    public $facebook;
+    public $twitter;
+    public $instagram;
+   
     protected $rules = [
         'category_id' => 'required',
         'product.subcategory_id' => 'required',
         'product.name' => 'required',
+        'product.mail' => 'required|email',
+        'product.phone_number' => 'required|string|min:7|max:10',
+        'product.business_type' => 'required|string|min:10|max:15',
+        'product.filling_number_id' => 'required',
         'slug' => 'required|unique:products,slug',
-        'product.description' => 'required',       
+        'product.description' => 'required',  
+        
+        /* redes sociales */
+       /*  'product.facebook' => 'required',  
+        'product.twitter' => 'required',  
+        'product.instagram' => 'required',   */
+
     ];
 
     protected $listeners = ['refreshProduct', 'delete'];
+    
 
     public function mount(Product $product){
         $this->product = $product;
 
+        $this->filling_numbers = FillingNumber::all();
+        
         $this->categories = Category::all();
-
         $this->category_id = $product->subcategory->category->id;
 
         $this->subcategories = Subcategory::where('category_id', $this->category_id)->get();
-
         $this->slug = $this->product->slug;     
-    }
 
+        /* departments */
+
+        $this->departments = Department::all();
+
+        $this->department_id = $this->product->department_id;
+        $this->city_id = $this->product->city_id;
+        $this->county_id = $this->product->county_id;
+
+        $this->cities = City::where('department_id',$this->department_id)->get();
+        $this->counties = County::where('city_id',$this->city_id)->get();
+
+        /* status */
+        $this->status_id = $this->product->status;
+        $this->status = [1,2];
+
+        /* redes */
+
+        $this->facebook = $this->product->facebook;
+        $this->twitter = $this->product->twitter;
+        $this->instagram = $this->product->instagram;
+    }
 
     public function refreshProduct(){
         $this->product = $this->product->fresh();
@@ -59,8 +110,18 @@ class EditProduct extends Component
         $this->product->subcategory_id = "";       
     }
 
-    public function getSubcategoryProperty(){
-        return Subcategory::find($this->product->subcategory_id);
+    public function updatedDepartmentId($value)
+    {
+        $this->reset(['city_id','county_id']);
+
+        $this->cities = City::where('department_id',$value)->get();
+        $this->counties = County::where('city_id',$this->city_id)->get();
+    }
+
+    public function updatedCityId($value)
+    {
+        $this->reset(['county_id']);
+        $this->counties = County::where('city_id',$value)->get();
     }
 
     public function save(){
@@ -71,6 +132,16 @@ class EditProduct extends Component
         $this->validate($rules);
 
         $this->product->slug = $this->slug;
+        $this->product->department_id = $this->department_id;
+        $this->product->city_id = $this->city_id;
+        $this->product->county_id = $this->county_id;
+
+        /* $this->product->status = $this->status_id; */
+        $this->product->status = $this->product->status = 2;
+        /* redes */
+        $this->product->facebook = $this->facebook;
+        $this->product->instagram = $this->instagram;
+        $this->product->twitter = $this->twitter;
 
         $this->product->save();
 
