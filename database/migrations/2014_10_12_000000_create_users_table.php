@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Livewire\Admin\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
+use App\Models\User as UserModel;
 
 return new class extends Migration
 {
@@ -23,7 +26,13 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            /* active */
+            $table->enum('client_status',[UserModel::ACTIVE,UserModel::INACTIVE])->default(UserModel::ACTIVE);
             $table->timestamps();
+
+              /* premium */
+
+            $table->enum('plan',[UserModel::REGULAR,UserModel::PREMIUM])->default(UserModel::REGULAR);
             
         });
            

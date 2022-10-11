@@ -12,7 +12,8 @@ class ProductPolicy
     
     public function published(User $user,Product $product)
     {
-        if ($user->id == $product->user_id) {
+        if ($user->id == $product->user_id && $user->client_status == 2 
+        || $user->hasRole('admin')) {
             return true;            
         }else{
             return false;

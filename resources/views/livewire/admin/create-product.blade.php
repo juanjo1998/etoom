@@ -1,9 +1,30 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
     
     <h1 class="text-3xl text-center font-semibold mb-8">Fill in the information to create your advertsing space</h1>
+    
+    {{-- users only for admin --}}       
+        
+    @if ($auth_user->hasRole('admin'))
+        <div class="bg-white rounded-lg shadow-lg p-4 mb-4 h-28">      
+            <div class="flex-1">
+                <x-jet-label value="Select user" />
+                <select class="w-full form-control" wire:model="user_id">
+                    <option value="" selected disabled>Select a user</option>
+    
+                    @foreach ($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
+                </select>
+    
+                <x-jet-input-error for="user_id" />
+            </div>
+        </div>
+    @endif
 
     {{-- name slug --}}
     <div class="bg-white rounded-lg shadow-lg  grid grid-cols-2 gap-6 p-4 mb-4 h-28">
+        
+        
 
         {{-- name --}}
         <div class="mb-4">
@@ -147,7 +168,7 @@
 
     {{-- states, cities, counties --}}
 
-    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+    <div class="flex bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
     
         {{-- states --}}
         <div class="flex-1">
@@ -194,7 +215,7 @@
 
     {{-- redes sociales --}}
 
-    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+    <div class="flex bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
 
         {{-- facebook --}}
         <div class="mb-4 flex-1">

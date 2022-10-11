@@ -9,6 +9,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     public function show(Product $product){
+
         if ($product->status == 1) {          
             $this->authorize('published',$product);
         }

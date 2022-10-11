@@ -31,11 +31,16 @@ return new class extends Migration
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
+
+            /* status */
+
+            $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR);
+
             
             $table->unsignedBigInteger('subcategory_id');
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
             
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             
             // ! campo agregado
@@ -54,9 +59,7 @@ return new class extends Migration
             $table->foreign('county_id')->references('id')->on('counties')->onDelete('cascade');
             
             $table->unsignedBigInteger('filling_number_id')->nullable();
-            $table->foreign('filling_number_id')->references('id')->on('filling_numbers')->onDelete('cascade');
-
-            $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR);
+            $table->foreign('filling_number_id')->references('id')->on('filling_numbers')->onDelete('cascade');    
 
             $table->timestamps();
         });

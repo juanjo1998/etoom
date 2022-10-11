@@ -25,6 +25,8 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /* validar que el usuario tenga el client_status en 2 */
+
         $this->configurePermissions();
 
         Jetstream::deleteUsersUsing(DeleteUser::class);

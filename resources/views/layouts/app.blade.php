@@ -22,10 +22,13 @@
       {{-- FlexSlider --}}
       <link rel="stylesheet" href="{{ asset('vendor/FlexSlider/flexslider.css') }}">
 
+
+      {{-- slider --}}
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+
       @livewireStyles
-
-      
-
+    
       {{-- Glider --}}
       <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.7/glider.min.js" integrity="sha512-tHimK/KZS+o34ZpPNOvb/bTHZb6ocWFXCtdGqAlWYUcz+BGHbNbHMKvEHUyFxgJhQcEO87yg5YqaJvyQgAEEtA==" crossorigin="anonymous"></script>
 
@@ -34,6 +37,10 @@
 
       {{-- FlexSlider --}}
       <script src="{{ asset('vendor/FlexSlider/jquery.flexslider-min.js') }}"></script>
+
+      {{-- slider --}}
+      <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

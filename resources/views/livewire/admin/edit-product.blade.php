@@ -1,4 +1,5 @@
 <div>
+   
     <header class="bg-white shadow">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
@@ -68,7 +69,7 @@
                 placeholder="Ingrese el slug del producto" />
 
             <x-jet-input-error for="slug" />
-        </div>
+        </div>       
 
         {{-- status --}}
 
@@ -189,7 +190,7 @@
 
     {{-- states, cities, counties --}}
 
-    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+    <div class="flex bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
     
         {{-- states --}}
         <div class="flex-1">
@@ -237,7 +238,7 @@
 
      {{-- redes sociales --}}
 
-    <div class="grid grid-cols-3 bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
+    <div class="flex bg-white rounded-lg shadow-lg gap-6 p-4 mb-4 h-28">
 
         {{-- facebook --}}
         <div class="mb-4 flex-1">

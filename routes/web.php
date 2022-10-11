@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Livewire\ShoppingCart;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 Use App\Http\Controllers\SearchController;
-use App\Http\Livewire\ShoppingCart;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AdvertisingController;
 
 
 
@@ -15,6 +16,10 @@ Route::get('categories/{category}', [CategoryController::class, 'show'])->name('
 Route::get('products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 //Route::get('shopping-cart', ShoppingCart::class)->name('shopping-cart');  pendiente para ghacer
+
+/* advertising */
+
+Route::get('/advertising/index',[AdvertisingController::class,'index'])->name('advertising.index');
 
 Route::middleware([
     'auth:sanctum',

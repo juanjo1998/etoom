@@ -18,9 +18,12 @@ use Illuminate\Support\Str;
 use App\Models\FillingNumber;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class EditProduct extends Component
 {
+
+    use AuthorizesRequests;
 
     public $category_id;
 
@@ -175,6 +178,8 @@ class EditProduct extends Component
 
     public function render()
     {
+        $this->authorize('clientStatus',User::class);
+
         return view('livewire.admin.edit-product')->layout('layouts.admin');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Product;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,6 +20,16 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+
+    /* client_status */
+
+    const INACTIVE = 1;
+    const ACTIVE = 2;
+
+    /* plan */
+
+    const REGULAR = 1;
+    const PREMIUM = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -66,6 +75,13 @@ class User extends Authenticatable
 
     //Relacion uno a muchos
     public function products(){
-        return $this->hasMany(Product::class); // user_id
+        return $this->hasMany(Product::class,'user_id'); // user_id
+    }
+
+    // relacion uno a uno
+
+    public function premiumImage()
+    {
+        return $this->hasOne(PremiumImage::class,'user_id');
     }
 }

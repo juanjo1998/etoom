@@ -8,6 +8,7 @@ use App\Models\Product;
 
 use App\Models\Department;
 use App\Models\Subcategory;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -34,6 +35,9 @@ class ProductFactory extends Factory
         $subcategory = Subcategory::all()->random();
         $category = $subcategory->category; 
 
+        /* $this->faker->randomElement([1,2]) */
+        $users = User::all();
+
         return [
             'name' => $name,
             'slug' => Str::slug($name),
@@ -43,7 +47,7 @@ class ProductFactory extends Factory
             'mail' => 'mail empresarial',
             'filling_number_id' => $this->faker->randomElement([1,2]),
             'subcategory_id' => $subcategory->id,            
-            'user_id' => $this->faker->randomElement([1,2]),
+            'user_id' => $users->random()->id,
             // ! campos agregados  que generan un id aleatorio de departamento ciudad y condado para cada uno de los productos
             'department_id' => Department::all()->random(),
             'city_id' => City::all()->random(),

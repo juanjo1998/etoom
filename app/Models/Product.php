@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\Admin\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +9,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    /* status */
+
     const BORRADOR = 1;
     const PUBLICADO = 2;
-
-    const PERSONAL = "personal";
-    const EMPRESARIAL = "empresarial";
 
     protected $guarded = ['id', 'created_at', 'update_at'];
 
@@ -62,6 +60,13 @@ class Product extends Model
     public function filling_number() // filling_number_id
     {
         return $this->belongsTo(FillingNumber::class);
+    }
+
+    /* relacion uno a uno */
+
+    public function premiumImage()
+    {
+        return $this->hasOne(PremiumImage::class,'product_id');
     }
 
     //URL AMIGABLES

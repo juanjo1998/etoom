@@ -47,7 +47,7 @@
                             Administrator
                         </x-jet-dropdown-link>
                         @endcan
-                        <x-jet-dropdown-link href="{{ route('admin.products.create') }}">
+                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
                             My Office
                         </x-jet-dropdown-link>
 
@@ -143,7 +143,7 @@
              Administrator
          </x-jet-dropdown-link>
          @endcan
-         <x-jet-dropdown-link href="{{ route('admin.products.create') }}">
+         <x-jet-dropdown-link href="{{ route('admin.index') }}">
              My Office
          </x-jet-dropdown-link>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\City;
+use App\Models\User;
 use App\Models\Brand;
 use App\Models\Order;
 use App\Models\County;
@@ -11,15 +12,17 @@ use Livewire\Component;
 use App\Models\Business;
 use App\Models\Category;
 use App\Models\Department;
-use App\Models\FillingNumber;
 use App\Models\Subcategory;
 
 use Illuminate\Support\Str;
+use App\Models\FillingNumber;
 use Illuminate\Database\Eloquent\Builder;
 use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CreateProduct extends Component
 {
+    use AuthorizesRequests;
 
     // ! $cities = [] , $counties = [] deben iniciar como un arreglo vacío, hasta que no seleccione un departamento no se va a llenar esta informacion, de lo contrario le dara error
 
@@ -31,6 +34,15 @@ class CreateProduct extends Component
     public $facebook,$instagram,$twitter;
 
     public $object;
+
+    /* users (only admin) */
+
+    public $users = [];
+    public $user_id = "";
+
+    /* auth user */
+    
+    public $auth_user;
 
     protected $rules = [
         'category_id' => 'required',
@@ -44,7 +56,7 @@ class CreateProduct extends Component
         'filling_number_id' => 'required',
         'department_id' => 'required',
         'city_id' => 'required',
-        'county_id' => 'required',
+        'county_id' => 'required',       
 
         /* redes */
         /* 'facebook' => 'required',
@@ -94,12 +106,22 @@ class CreateProduct extends Component
        /*  $this->cities = City::all();
         $this->counties = County::all(); */
 
+
+        /* admin */
+
+        $this->users = User::all();
+        $this->auth_user = auth()->user();
+
     }
 
 
     public function save(){
 
         $rules = $this->rules;
+
+        /* if (User::find($this->auth_user->id)->hasRole('admin')) {
+            $rules['user_id'];
+        } */
 
         $this->validate($rules);
 
@@ -121,12 +143,18 @@ class CreateProduct extends Component
 
         // ! linea agregada
 
-        $product->user_id = auth()->user()->id;
+        if (User::find($this->auth_user->id)->hasRole('admin')) {
+            $product->user_id = $this->user_id;
+        }else{
+            $product->user_id = auth()->user()->id;
+        }
 
         /* redes sociales */
         $product->facebook = $this->facebook;
         $product->instagram = $this->instagram;
         $product->twitter = $this->twitter;
+
+       
 
 
         $product->save();
@@ -161,6 +189,8 @@ class CreateProduct extends Component
 
     public function render()
     {
+        $this->authorize('clientStatus',User::class);
+
         return view('livewire.admin.create-product')->layout('layouts.admin');
     }
 }

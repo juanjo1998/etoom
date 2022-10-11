@@ -53,6 +53,20 @@
                         </x-jet-nav-link>
                         @endcan
 
+                        @if (auth()->user()->hasRole('client'))                        
+                            <x-jet-nav-link href="{{route('admin.premium.index')}}" :active="request()->routeIs('admin.premium.index')">
+                                <span class="text-yellow-400 font-bold">PREMIUM</span>
+                            </x-jet-nav-link>
+                            @else
+
+                            <x-jet-nav-link href="{{route('admin.advertising.index')}}" :active="request()->routeIs('admin.advertising.index')">
+                                <span class="text-yellow-400 font-bold">
+                                    ADVERTISING SLIDERS</span>
+                            </x-jet-nav-link>
+                        @endif
+
+                      
+                       
                     {{--<x-jet-nav-link href="{{route('admin.users.index')}}" :active="request()->routeIs('admin.users.index')">
                         Usuarios
                     </x-jet-nav-link>--}}
