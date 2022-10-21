@@ -1,20 +1,25 @@
 <x-app-layout>
-
-    @livewire('public-slider')
-
-    <div class="container py-8">
-        <section class="mb-6">
-            <div class="flex items-center mb-2">
-            <h1 class="text-lg uppercase font-semibold  text-gray-700">categories</h1>
-            <!--<h3><a href="" class="text-sky-600 hover:text-sky-400 hover:underline ml-2 font-semibold">To go Subcategories</a></h3>-->
-
-            </div>
-
-           @livewire('categories-slider', ['categories' => $categories]) 
-
     
-        </section>
-          
+    <div>
+        {{-- modal --}}
+
+        @livewire('modal')
+
+        @livewire('public-slider')
+
+        <div class="container py-8">
+            <section class="mb-6">
+                <div class="flex items-center mb-2">
+                <h1 class="text-lg uppercase font-semibold  text-gray-700">categories</h1>
+                <!--<h3><a href="" class="text-sky-600 hover:text-sky-400 hover:underline ml-2 font-semibold">To go Subcategories</a></h3>-->
+
+                </div>        
+            @livewire('categories-slider', ['categories' => $categories]) 
+
+        
+            </section>
+            
+        </div>
     </div>
 
     @push('script')

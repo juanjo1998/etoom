@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('premium_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('product_id');
-            $table->string('route');
+            $table->unsignedBigInteger('product_id')->nullable();
+            $table->string('route')->nullable();
             $table->string('url');
             $table->timestamps();
 

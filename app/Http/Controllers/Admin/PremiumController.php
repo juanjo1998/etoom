@@ -55,22 +55,23 @@ class PremiumController extends Controller
         $this->authorize('premium',User::class);
 
         $request->validate([
-            'file' => 'required|image|max:2048',
-            'product_id' => 'required',            
+            'file' => 'required|image|max:2048',            
         ]);
             
         //$url = Storage::url($request->file('file')->store('premium'));
         $url = $request->file('file')->store('premium');
-        $product = Product::find($request->get('product_id'));
+        if ($request->get('product_id')) {
+            $product = Product::find($request->get('product_id'));
+        }
 
         if (auth()->user()->premiumImage) {
             return redirect()->route('admin.premium.create')->with('message','this user already has an image in the slider');
         }else{
             PremiumImage::create([
                 'url' => $url,
-                'route' => url('/products/'.$product->slug),
+                'route' => $request->get('product_id') ? url('/products/'.$product->slug) : '',
                 'user_id' => auth()->user()->id,
-                'product_id' => $product->id
+                'product_id' => $request->get('product_id') ? $product->id : null
             ]);
 
             return redirect()->route('admin.premium.index');
@@ -86,17 +87,19 @@ class PremiumController extends Controller
 
        if ($request->file('file')) {
             $url = Storage::put('premium',$request->file('file'));    
-            $product = Product::find($request->get('product_id'));   
-
-            Storage::delete($premiumImage->url);
-
-            $premiumImage->update([
-                'url' => $url,
-                'route' => url('/products/'.$product->slug),
-                'product_id' => $request->get('product_id'),
-                'user_id' => auth()->user()->id
-            ]);
+            Storage::delete($premiumImage->url);           
        }
+
+       if ($request->get('product_id') != '') {
+            $product = Product::find($request->get('product_id'));   
+       }
+
+       $premiumImage->update([
+            'url' => $request->file('file') ? $url : $premiumImage->url,
+            'route' => $request->get('product_id') != '' ?  url('/products/'.$product->slug) : null,
+            'product_id' => $request->get('product_id') ? $request->get('product_id'): null,
+            'user_id' => auth()->user()->id
+        ]);
 
        return redirect()->route('admin.premium.index');
     }

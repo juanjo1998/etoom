@@ -3,17 +3,7 @@
         <div>
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
         
-            <h1 class="text-3xl text-center font-semibold mb-8">complete this information to add one image to the main slider</h1>
-        
-           @if ($products->count() < 1)
-           
-           <div class="w-96 mx-auto mt-3">
-                <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">Attention!</strong>
-                <span class="block sm:inline">you must have at least one product.</span>                  
-            </div>
-    
-            @else
+            <h1 class="text-3xl text-center font-semibold mb-8">complete this information to add one image to the main slider</h1>               
                <div>
     
                 {{-- route --}}
@@ -56,7 +46,6 @@
                     </div>
                 </div>    
             </div>
-           @endif
 
            {{-- flash message --}}       
             

@@ -54,11 +54,15 @@
                                     </th>
 
                                     <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Ver</span>
+                                        <span class="sr-only">Show</span>
                                     </th>
                                                     
                                     <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Editar</span>
+                                        <span class="sr-only">Edit</span>
+                                    </th>
+
+                                    <th scope="col" class="relative px-6 py-3">
+                                        <span class="sr-only">Delete</span>
                                     </th>
                                 </tr>
 
@@ -165,7 +169,13 @@
                                             <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                         </td>
 
-                                        
+                                        {{-- delete --}}
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <form action="{{ route('admin.products.delete',$product) }}">
+                                                <button class="text-indigo-600 hover:text-indigo-900">Delete</button>
+                                            </form>
+                                        </td>
                                     
                                     </tr>                          
                             </tbody>

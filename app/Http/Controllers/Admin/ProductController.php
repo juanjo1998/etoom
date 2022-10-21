@@ -24,4 +24,11 @@ class ProductController extends Controller
             'url' => $url
         ]);
     }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+                
+        return back();
+    }
 }

@@ -24,6 +24,7 @@
                                         Ruta
                                     </th>  
                                     
+                                    
                                     <th scope="col text-center"
                                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Ver
@@ -73,11 +74,19 @@
                                         </td>
 
                                         {{-- show --}}
-                                
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                            <a href="{{ route('products.show',$product) }}" 
-                                            class="text-indigo-600 hover:text-indigo-900">Ver</a>
-                                        </td>    
+
+                                        @if ($premiumImage->product_id)
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                <a href="{{ route('products.show',$product) }}" 
+                                                class="text-indigo-600 hover:text-indigo-900">Ver</a>
+                                            </td>    
+
+                                            @else
+                                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                <a href="" 
+                                                class="text-indigo-600 hover:text-indigo-900">Dont have route</a>
+                                            </td>  
+                                        @endif                                                                   
                                                                                                             
                                         {{-- edit --}}
 

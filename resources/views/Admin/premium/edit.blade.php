@@ -30,7 +30,7 @@
                             <x-jet-label value="Products" />
 
                             <select class="w-full form-control" name="product_id">
-                                <option value="" selected disabled>Select a user product</option>
+                                <option value="" selected >Select a user product</option>
                 
                                 @foreach ($products as $product)
                                     <option value="{{$product->id}}" @if($product->id=== $premiumImage->product_id) selected='selected' @endif>{{$product->name}}</option>

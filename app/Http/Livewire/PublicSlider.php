@@ -12,6 +12,11 @@ class PublicSlider extends Component
     public $premiumTestImages = [];
     public $mergePremium = []; */
 
+    public function emptySlide()
+    {
+        $this->emitTo('modal','emptySlide');
+    }
+
     public function render()
     {
         $premiumImages = PremiumImage::all();
