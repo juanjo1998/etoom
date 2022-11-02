@@ -39,15 +39,12 @@
                 <div class="mt-2">
                   <p class="text-sm text-gray-500">
                     This advertisement does not have an associated product.</p>
-                    @if (auth()->user())
                         
-                    @if (!auth()->user()->premiumImage->product_id)                        
-                      <div class="text-center py-4">
-                        <a href="{{ route('admin.products.create') }}" class="text-blue-400 hover:opacity-75">Click to create a product</a>
-                      </div>
-                    @endif
-
-                    @endif
+                      @if (auth()->user() && empty(auth()->user()->premiumImage))                        
+                        <div class="text-center py-4">
+                          <a href="{{ route('admin.products.create') }}" class="text-blue-400 hover:opacity-75">Click to create a product</a>
+                        </div>
+                      @endif
                     
                 </div>
               </div>           

@@ -11,6 +11,13 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+/* billable */
+use Laravel\Cashier\Billable;
+
+/* avisa a stripe de algun cambio en User para que lo actualice */
+
+use function Illuminate\Events\queueable;
+
 
 class User extends Authenticatable
 {
@@ -20,6 +27,10 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+
+    /* billable */
+
+    use Billable;
 
     /* client_status */
 
@@ -83,5 +94,16 @@ class User extends Authenticatable
     public function premiumImage()
     {
         return $this->hasOne(PremiumImage::class,'user_id');
+    }
+
+    /* stripe */
+
+    protected static function booted()
+    {
+        static::updated(queueable(function ($customer) {
+            if ($customer->hasStripeId()) {
+                $customer->syncStripeCustomerDetails();
+            }
+        }));
     }
 }

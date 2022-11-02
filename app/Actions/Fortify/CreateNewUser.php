@@ -28,11 +28,17 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
-            'email' => $input['email'],
             'last_name' => $input['last_name'],
+            'email' => $input['email'],
             'password' => Hash::make($input['password']),
-        ])->assignRole('client');// linea para signar role cuando se registre
+        ]);
+
+        $user->assignRole('client'); // Asignacion de role cuando se crea
+
+        $user->createAsStripeCustomer();
+
+        return $user;
     }
 }

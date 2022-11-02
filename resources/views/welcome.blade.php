@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout> 
     
     <div>
         {{-- modal --}}
@@ -14,11 +14,10 @@
                 <!--<h3><a href="" class="text-sky-600 hover:text-sky-400 hover:underline ml-2 font-semibold">To go Subcategories</a></h3>-->
 
                 </div>        
-            @livewire('categories-slider', ['categories' => $categories]) 
+                
+                @livewire('categories-slider', ['categories' => $categories]) 
 
-        
-            </section>
-            
+            </section>            
         </div>
     </div>
 

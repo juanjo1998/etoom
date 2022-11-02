@@ -10,8 +10,16 @@
            <div class="w-96 mx-auto mt-3">
                 <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
                 <strong class="font-bold">Attention!</strong>
-                <span class="block sm:inline">you must have at least one product.</span>                  
+                <span class="block sm:inline">you must have at least one product.</span>                                  
             </div>
+
+           <div class="flex justify-center">
+                <div class="mt-5">
+                    <a href="{{ route('admin.products.create') }}" class="bg-sky-400 py-2 px-4 rounded-md cursor-pointer">
+                        Create product
+                    </a>
+                </div>
+           </div>
     
             @else
                <div>

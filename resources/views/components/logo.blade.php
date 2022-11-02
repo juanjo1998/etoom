@@ -1,5 +1,3 @@
 <div>
-    <a href="/">
-        <p class="text-lime-500"> etoom</p>
-    </a>
+    <img src="{{ asset('images/OriginalNav.png') }}" class="block h-9 w-auto" alt="Logo">
 </div>

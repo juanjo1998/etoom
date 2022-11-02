@@ -2,23 +2,28 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-
-use Livewire\WithPagination;
+use App\Models\User;
 
 use App\Models\Product;
+
+use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Database\Eloquent\Builder;
 
 class CategoryFilter extends Component
 {
     use WithPagination;
 
-    public $category, $subcategories;
+    public $category, $subcategories,$user;
 
     public $view = "grid";
 
-
     protected $queryString = ['subcategories'];
+
+    public function mount()
+    {
+        $this->user = new User();
+    }
 
     public function clear(){
         $this->reset(['subcategories','page']);

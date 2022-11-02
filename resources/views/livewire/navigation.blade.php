@@ -1,8 +1,10 @@
-<header class="bg-sky-500 shadow-lg sticky top-0 z-50" x-data="dropDown()">
+<header class="bg-sky-500 shadow-lg sticky top-0" x-data="dropDown()" style="z-index: 200">
     {{-- logo-categories-search-user-cart --}}
     <div class="container flex items-center h-24 justify-between md:justify-start">        
         {{-- logo --}}
-        <a href="/"><x-jet-application-mark class="block h-9 w-auto"/></a>  
+        <a href="/">
+            <x-logo/>
+        </a>  
 
         {{-- categorias --}}
         <a class="flex border p-2 shadow hover:bg-lime-400 transition duration-300 ease-in-out rounded-md mx-2 cursor-pointer" 
@@ -42,12 +44,12 @@
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>  
-                        @can('admin.index')
+                       {{--  @can('admin.posts.index')
                         <x-jet-dropdown-link href="{{ route('admin.index') }}">
                             Administrator
                         </x-jet-dropdown-link>
-                        @endcan
-                        <x-jet-dropdown-link href="{{ route('admin.index') }}">
+                        @endcan --}}
+                        <x-jet-dropdown-link href="{{ route('admin.posts.index') }}">
                             My Office
                         </x-jet-dropdown-link>
 
@@ -138,12 +140,12 @@
          {{-- mobile cart shop 
          @livewire('cart-mobil')--}}
 
-         @can('admin.index')
+        {{--  @can('admin.index')
          <x-jet-dropdown-link href="{{ route('admin.index') }}">
              Administrator
          </x-jet-dropdown-link>
-         @endcan
-         <x-jet-dropdown-link href="{{ route('admin.index') }}">
+         @endcan --}}
+         <x-jet-dropdown-link href="{{ route('admin.posts.index') }}">
              My Office
          </x-jet-dropdown-link>
 

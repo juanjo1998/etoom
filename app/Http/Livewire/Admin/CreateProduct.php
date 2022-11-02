@@ -154,9 +154,6 @@ class CreateProduct extends Component
         $product->instagram = $this->instagram;
         $product->twitter = $this->twitter;
 
-       
-
-
         $product->save();
 
         //return $product;

@@ -1,10 +1,13 @@
 <x-admin-layout>
     <div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-gray-700">
-            @if (auth()->user()->plan == '2' && auth()->user()->client_status == '2')
                         
-                @if ($premiumImages->count() >= 1)
-            
+          {{--   @if ($premiumImages->count() >= 1) --}}
+
+          @if (auth()->user()->subscribed('Prueba premium'))
+              
+                    @if (auth()->user()->premiumImage)
+                        
                     <h1 class="text-3xl text-center font-semibold mb-8">            
                         This image will be displayed in the main slider.            
                     </h1>
@@ -16,38 +19,34 @@
 
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Imagen
+                                        Image
                                     </th>
                                 
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Ruta
+                                        Route
                                     </th>  
                                     
                                     
                                     <th scope="col text-center"
                                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Ver
+                                        Show
                                     </th>  
+
+                                    @if (auth()->user()->subscribed('Prueba premium') && auth()->user()->subscribed('Prueba'))
+
                                     
-                                    <th scope="col text-center"
-                                        class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Editar
-                                    </th>                      
+                                        <th scope="col text-center"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Edit
+                                        </th>                      
+
+                                    @endif
                                 
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Eliminar
-                                    </th>  
-
-                                
-                                    {{-- <th scope="col" class="relative px-6 py-3">
-                                        <span >Editar</span>
-                                    </th>
-
-                                    <th scope="col" class="relative px-6 py-3">
-                                        <span >Eliminar</span>
-                                    </th> --}}
+                                        Delete
+                                    </th>                                  
                                 </tr>                                           
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -67,9 +66,17 @@
                                         {{-- product name --}}
                                         <td class="px-6 py-4 whitespace-nowrap">
 
-                                            <div class="text-sm text-gray-900">
-                                                {{ Str::limit($premiumImage->route) }}
-                                            </div>
+                                            @if ($premiumImage->route)
+                                                <div class="text-sm text-gray-900">
+                                                    {{ Str::limit($premiumImage->route) }}
+                                                </div>
+                                            @else
+                                                <div class="text-sm text-red-400">
+                                                    Dont exist route
+                                                </div>
+                                            @endif
+
+                                           
 
                                         </td>
 
@@ -83,17 +90,22 @@
 
                                             @else
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                                <a href="" 
-                                                class="text-indigo-600 hover:text-indigo-900">Dont have route</a>
+                                                <a href="/" 
+                                                class="text-indigo-600 hover:text-indigo-900">show advertising</a>
                                             </td>  
                                         @endif                                                                   
                                                                                                             
                                         {{-- edit --}}
 
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                            <a href="{{ route('admin.premium.edit',$premiumImage->id) }}" 
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                        </td>       
+                                        @if (auth()->user()->subscribed('Prueba premium') && auth()->user()->subscribed('Prueba'))
+                                            
+                                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                    <a href="{{ route('admin.premium.edit',$premiumImage->id) }}" 
+                                                    class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                                </td>                                                 
+
+                                        @endif
+
                                         
                                         {{-- eliminar --}}
 
@@ -112,20 +124,21 @@
                         </table>                        
                     </div>
 
-                @else            
-                    <h2 class="text-4xl text-center font-semibold mb-8">            
-                        You haven't uploaded a premium image yet.
-                    </h2>
+                    @else
 
-                    <div class="flex justify-center items-center">
-                        <x-button-enlace href="{{ route('admin.premium.create') }}">
-                            Add image
-                        </x-button-enlace>
+                    <div class="bg-yellow-100 rounded-md border-yellow-500 text-yellow-700 p-4 flex justify-between items-center" role="alert">
+                        <p>
+                            you have not uploaded an advertising image yet
+                        </p>
+
+                        <a href="{{ route('admin.premium.create') }}" class="btn btn-primary">Create adversiting image</a>
                     </div>
-                @endif
+
+                    @endif
+
 
             @else
-
+            
             <div class="mb-4">
                 <div class="bg-orange-100 rounded-md border-orange-500 text-orange-700 p-4" role="alert">
                     <p class="font-bold">Slider Image</p>
@@ -134,12 +147,12 @@
             </div>
 
             <div class="flex justify-center">
-                <x-button-enlace class="cursor-pointer">                
+                <x-button-enlace href="{{ route('billing.premium') }}" class="cursor-pointer">                
                     I want to be premium
                 </x-button-enlace>
             </div>
 
-            @endif
+          @endif         
         </div>        
     </div>
 </x-admin-layout>

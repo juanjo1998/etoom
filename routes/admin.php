@@ -6,14 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Admin\EditProduct;
 use App\Http\Livewire\Admin\ShowCategory;
 use App\Http\Livewire\Admin\ShowProducts;
+
 use App\Http\Livewire\Admin\CreateProduct;
 
 use App\Http\Livewire\Admin\BrandComponent;
-
 use App\Http\Livewire\Admin\ShowDepartment;
-use App\Http\Livewire\Admin\ExampleComponent;
 Use App\Http\Livewire\Admin\CityComponent;
 
+use App\Http\Livewire\Admin\ExampleComponent;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Livewire\Admin\CreatePremiumImage;
 use App\Http\Livewire\Admin\DepartmentComponent;
@@ -21,15 +21,17 @@ use App\Http\Controllers\Admin\PremiumController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdvertisingController;
+use App\Http\Livewire\Admin\UsersType;
 
-Route::get('/', ShowProducts::class)->name('admin.index');
+Route::get('/', ShowProducts::class)->middleware('admin')->name('admin.index');
+Route::get('users-type',UsersType::class)->middleware('admin')->name('admin.users.type');
 
 Route::get('posts', MyPost::class)->name('admin.posts.index');
 
-Route::get('products/create', CreateProduct::class)->name('admin.products.create');
-Route::get('products/{product}/edit', EditProduct::class)->name('admin.products.edit');
-Route::get('products/{product}/delete', [ProductController::class, 'delete'])->name('admin.products.delete');
-Route::post('products/{product}/files', [ProductController::class, 'files'])->name('admin.products.files');
+Route::get('products/create', CreateProduct::class)->middleware('subscription')->name('admin.products.create');
+Route::get('products/{product}/edit', EditProduct::class)->middleware('subscription')->name('admin.products.edit');
+Route::get('products/{product}/delete', [ProductController::class, 'delete'])->middleware('subscription')->name('admin.products.delete');
+Route::post('products/{product}/files', [ProductController::class, 'files'])->middleware('subscription')->name('admin.products.files');
 
 Route::get('categories', [CategoryController::class, 'index'])->name('admin.categories.index');
 Route::get('categories/{category}', ShowCategory::class)->name('admin.categories.show');
@@ -45,12 +47,12 @@ Route::get('test/{order}',[TestController::class,'test'])->name('admin.test');
 
 /* premium */
 
-Route::get('premium',[PremiumController::class,'index'])->name('admin.premium.index');
-Route::get('premium/edit/{premiumImage}',[PremiumController::class,'edit'])->name('admin.premium.edit');
-Route::get('premium/create',[PremiumController::class,'create'])->name('admin.premium.create');
-Route::post('premium/store',[PremiumController::class,'store'])->name('admin.premium.store');
-Route::post('premium/update/{premiumImage}',[PremiumController::class,'update'])->name('admin.premium.update');
-Route::post('premium/delete/{premiumImage}',[PremiumController::class,'delete'])->name('admin.premium.delete');
+Route::get('premium',[PremiumController::class,'index'])->middleware('premium')->name('admin.premium.index');
+Route::get('premium/edit/{premiumImage}',[PremiumController::class,'edit'])->middleware('premium')->name('admin.premium.edit');
+Route::get('premium/create',[PremiumController::class,'create'])->middleware('premium')->name('admin.premium.create');
+Route::post('premium/store',[PremiumController::class,'store'])->middleware('premium')->name('admin.premium.store');
+Route::post('premium/update/{premiumImage}',[PremiumController::class,'update'])->middleware('premium')->name('admin.premium.update');
+Route::post('premium/delete/{premiumImage}',[PremiumController::class,'delete'])->middleware('premium')->name('admin.premium.delete');
 
 /* advertising */
 Route::get('/advertising/index',[AdvertisingController::class,'index'])->name('admin.advertising.index');

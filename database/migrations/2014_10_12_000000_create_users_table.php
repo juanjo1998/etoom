@@ -17,7 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id();           
             $table->string('name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -32,8 +32,7 @@ return new class extends Migration
 
               /* premium */
 
-            $table->enum('plan',[UserModel::REGULAR,UserModel::PREMIUM])->default(UserModel::REGULAR);
-            
+            $table->enum('plan',[UserModel::REGULAR,UserModel::PREMIUM])->default(UserModel::REGULAR);          
         });
            
     }

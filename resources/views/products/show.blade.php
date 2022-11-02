@@ -14,9 +14,9 @@
             </div>
 
             <div>
-                {{-- @if ($product->status == 1)
+                @if ($product->status == 1)
                    <p class="text-red-300">Anuncio en borrador</p>
-                @endif --}}
+                @endif
                 <h1 class="text-2xl font-bold text-trueGray-700 capitalize text-center">{{$product->name}}</h1>
     
                 {{-- phone number - mail --}}  

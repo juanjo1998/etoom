@@ -1,37 +1,43 @@
-<div id="carouselExampleSlidesOnly" class="carousel slide relative cursor-pointer" data-bs-ride="carousel">
-  <div class="carousel-inner relative w-full overflow-hidden" style="height: 400px;">
+@php
+  use App\Models\User;
 
-    {{-- {{ $mergePremium }} --}}   
+  $user = new User();
+@endphp
 
-    @if ($mergePremium)    
-      {{-- publicitarias de la pagina --}}
+@if (!$mergePremium->count() <= 0)    
+  <div id="carouselExampleSlidesOnly" class="carousel slide relative cursor-pointer" data-bs-ride="carousel">
+    <div class="carousel-inner relative w-full overflow-hidden">      
+        {{-- publicitarias de la pagina --}}
         @foreach ($mergePremium->shuffle() as $mP)   
-               
-          <div class="carousel-item {{ $loop->first ? 'active' : '' }} relative float-left w-full">
-             <a 
-             @if ($mP->route == '')
-              wire:click="emptySlide"
-             @else
-                href="{{ $mP->route }}"
-             @endif
-             >
-                <img
-                src="{{ Storage::url($mP->url) }}"
-                class="
-                block 
-                w-full 
-                object-cover 
-                object-center 
-                img-slide"
-                alt="img slider"
-              />
-             </a>
-          </div>
-          
+          @if ($user::where('id',$mP->user_id)->get()->first()->subscribed('Prueba premium') 
+          || $user::where('id',$mP->user_id)->get()->first()->hasRole('admin'))
+                    
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }} relative float-left w-full" style="height: 400px;">
+              <a 
+              @if ($mP->route == '')
+                wire:click="emptySlide"
+              @else
+                  href="{{ $mP->route }}"
+              @endif
+              >
+                  <img
+                  style="height: 100%"
+                  src="{{ Storage::url($mP->url) }}"
+                  class="                 
+                  block 
+                  w-full 
+                  object-cover 
+                  object-center
+                  img-slide"
+                  alt="img slider"
+                />
+              </a>
+            </div>
+                
+          @endif
         @endforeach
-
-    @endif       
+    </div>
   </div>
-</div>
+@endif       
 
 

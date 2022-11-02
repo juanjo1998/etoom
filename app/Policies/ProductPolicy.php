@@ -10,12 +10,19 @@ class ProductPolicy
 {
     use HandlesAuthorization;
     
-    public function published(User $user,Product $product)
+    public function published(User $user = null,Product $product)
     {
-        if ($user->id == $product->user_id && $user->client_status == 2 
-        || $user->hasRole('admin')) {
-            return true;            
-        }else{
+        if ($user) {
+            if($user->hasRole('admin')){
+                return true;
+            }
+        }
+
+        if (User::where('id',$product->user_id)->get()->first()->subscribed('Prueba')) {
+            return true;
+        }       
+        
+        else{
             return false;
         }
     }

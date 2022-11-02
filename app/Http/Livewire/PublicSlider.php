@@ -8,10 +8,6 @@ use App\Models\PremiumTestImage;
 
 class PublicSlider extends Component
 {   
-   /*  public $premiumImages = [];
-    public $premiumTestImages = [];
-    public $mergePremium = []; */
-
     public function emptySlide()
     {
         $this->emitTo('modal','emptySlide');
@@ -23,8 +19,6 @@ class PublicSlider extends Component
         $premiumTestImages = PremiumTestImage::all();   
 
         $condicion = "";
-
-        $mergePremium = [];   
         
         if ($premiumImages->count() < 5 && $premiumTestImages->count() >= 3) {
             $mergePremium = $premiumImages->merge($premiumTestImages);

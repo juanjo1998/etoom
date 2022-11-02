@@ -19,7 +19,7 @@
 
         @else
 
-        <x-button-enlace class="ml-auto" href="{{route('admin.products.create')}}">
+        <x-button-enlace class="ml-auto" href="{{route('admin.posts.index')}}">
             Go my office
         </x-button-enlace>
         @endif

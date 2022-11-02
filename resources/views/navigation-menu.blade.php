@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="/">
-                        <x-logo class="block h-9 w-auto" />
+                        <x-logo class="block h-9 w-auto" />                      
                     </a>
                 </div>
 
@@ -19,9 +19,9 @@
                         </x-jet-nav-link>
 
                         @can('admin.index')
-                        <x-jet-nav-link href="{{route('admin.index')}}" :active="request()->routeIs('admin.index')">
-                            Products
-                        </x-jet-nav-link>
+                            <x-jet-nav-link href="{{route('admin.index')}}" :active="request()->routeIs('admin.index')">
+                                Products
+                            </x-jet-nav-link>
                         @endcan
 
                         <x-jet-nav-link href="{{route('admin.products.create')}}" :active="request()->routeIs('admin.products.*')">
@@ -54,9 +54,19 @@
                         @endcan
 
                         @if (auth()->user()->hasRole('client'))                        
+                           
+                            <x-jet-nav-link href="{{route('billing.index')}}" :active="request()->routeIs('billing.index')">
+                                <span>Billing</span>
+                            </x-jet-nav-link>
+
+                            <x-jet-nav-link href="{{route('billing.premium')}}" :active="request()->routeIs('billing.premium')">
+                                <span>Billing premium</span>
+                            </x-jet-nav-link>
+
                             <x-jet-nav-link href="{{route('admin.premium.index')}}" :active="request()->routeIs('admin.premium.index')">
                                 <span class="text-yellow-400 font-bold">PREMIUM</span>
                             </x-jet-nav-link>
+
                             @else
 
                             <x-jet-nav-link href="{{route('admin.advertising.index')}}" :active="request()->routeIs('admin.advertising.index')">
@@ -201,6 +211,24 @@
 
             <x-jet-nav-link href="{{route('admin.products.create')}}" :active="request()->routeIs('admin.products.*')">
                 Post here!
+            </x-jet-nav-link>
+
+            <x-jet-nav-link href="{{route('admin.posts.index')}}" :active="request()->routeIs('admin.posts.index')">
+                My post
+            </x-jet-nav-link>
+
+            <x-jet-nav-link href="{{route('billing.index')}}" :active="request()->routeIs('billing.index')">
+               Billing
+            </x-jet-nav-link>
+
+            <x-jet-nav-link href="{{route('billing.premium')}}" :active="request()->routeIs('billing.premium')">
+                Billing premium
+            </x-jet-nav-link>
+
+            <x-jet-nav-link href="{{route('admin.premium.index')}}" :active="request()->routeIs('admin.premium.index')">
+                <span class="text-yellow-300">
+                    Premium
+                </span>
             </x-jet-nav-link>
 
            {{-- <x-jet-nav-link href="{{route('admin.orders.index')}}" :active="request()->routeIs('admin.orders.*')">

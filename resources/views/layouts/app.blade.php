@@ -39,7 +39,7 @@
       <script src="{{ asset('vendor/FlexSlider/jquery.flexslider-min.js') }}"></script>
 
       {{-- slider --}}
-      <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>    
 
     </head>
     <body class="font-sans antialiased">
@@ -61,6 +61,10 @@
         @stack('modals')
 
         @livewireScripts
+        {{-- stripe --}}
+
+        <script src="https://js.stripe.com/v3/"></script>
+
         <!--Scrip para ventana de nav -->
         <script>
             function dropDown(){

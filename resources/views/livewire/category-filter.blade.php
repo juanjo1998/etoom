@@ -49,6 +49,8 @@
 
                 <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     @forelse ($products as $product)
+                    @if ($user->where('id',$product->user_id)->first()->subscribed('Prueba'))
+                        
                         <li class="bg-white rounded-lg shadow">
                             <article>
                                 <figure>
@@ -60,12 +62,13 @@
                                             <a href="{{ route('products.show', $product) }}">
                                                 {{Str::limit($product->name, 20)}}
                                             </a>
-                                        </h1>
-
-                                    
+                                        </h1>                                    
                                 </div>
                             </article>
                         </li>
+
+                    @endif
+
 
                     @empty
                         <li class="md:col-span-2 lg:col-span-4">
@@ -80,9 +83,9 @@
             @else
                 <ul>
                     @forelse ($products as $product)
-                        
-                    <x-product-list :product="$product" />
-
+                        @if ($user->where('id',$product->user_id)->first()->subscribed('Prueba'))
+                            <x-product-list :product="$product" />
+                        @endif
                     @empty
 
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
